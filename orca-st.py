@@ -153,6 +153,5 @@ header1=header1.ljust(max_len_line,' ')
 header2=header2.ljust(max_len_line,'-')
 print(header1+"|")
 print(header2+"|")
-#print("|-------|---------------|-----------------|--------------|---------------------"+f'{a:->{delta}}')
 for element in md_table:
     print(f'{element:{max_len_line}}|')
