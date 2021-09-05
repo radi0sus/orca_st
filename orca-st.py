@@ -3,13 +3,8 @@
 # orca-st
 '''
 
-import sys                              #sys files processing
-import os                               #os file processing
 import re                               #regular expressions
 import argparse                         #argument parser
-import numpy as np                      #summation
-import matplotlib.pyplot as plt         #plots
-from scipy.signal import find_peaks     #peak detection
 
 # global constants
 found_uv_section=False                                                                   #check for uv data in out
