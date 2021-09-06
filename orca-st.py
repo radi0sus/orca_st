@@ -3,8 +3,14 @@
 # orca-st
 '''
 
+
+import sys                              #system
 import re                               #regular expressions
 import argparse                         #argument parser
+
+#remove comment in case you get an error when saving the output to a file
+#alternatively replace 'cm⁻¹' with 'cm-1' in the table header (close to the end of script)
+#sys.setdefaultencoding("utf-8")                                                         
 
 # global constants
 found_uv_section=False                                                                   #check for uv data in out
@@ -12,7 +18,9 @@ specstring_start = 'ABSORPTION SPECTRUM VIA TRANSITION ELECTRIC DIPOLE MOMENTS' 
 specstring_end = 'ABSORPTION SPECTRUM VIA TRANSITION VELOCITY DIPOLE MOMENTS'            #stop reading orca.out from here
 state_string_start = 'TD-DFT/TDA EXCITED STATES'                                         #check for states from here
 state_string_end = 'TD-DFT/TDA-EXCITATION SPECTRA'                                       #stop reading states from here
+nto_string_start ='NATURAL TRANSITION ORBITALS'                                          #NTOs start here
 threshold = 0                                                                            #default threshold
+found_nto = False                                                                        #found NTOs in orca.out
 
 #global lists
 statelist=list()            #mode
@@ -23,6 +31,10 @@ orblist=list()              #list of orbital -> orbital transition
 statedict=dict()            #dictionary of states with all transitions
 selected_statedict=dict()   #dictionary of selected states with all transitions and or with those above the threshold
 md_table = list()           #table for the markdown output
+
+nto_orblist=list()          #list of orbital -> orbital transition for NTOs
+nto_statedict=dict()        #dictionary of states with all transitions for NTOs
+
 
 # parse arguments
 parser = argparse.ArgumentParser(prog='orca_st', 
@@ -51,8 +63,18 @@ parser.add_argument('-t','--threshold',
     'transitions below the threshold will not be printed\n'
     'e.g. -t 2')
 
+#NTO
+parser.add_argument('-nto','--nto',
+    default=0, action='store_true',
+    help='define a threshold in %% \n'
+    'transitions below the threshold will not be printed\n'
+    'e.g. -t 2')
+
 #parse arguments
 args = parser.parse_args()
+
+#change values according to arguments
+nto = args.nto
 
 #check if threshold is between 0 and 100%, reset if not
 if args.threshold:
@@ -83,10 +105,27 @@ try:
                         if orblist:
                             statedict[match_state.group(1)] = orblist
                             orblist=[] 
+                                                        
                     #exit here
+                    elif nto_string_start in line:
+                        break
                     elif state_string_end in line:
                         break
-                        
+            
+            #same for NTOs
+            if re.search("FOR STATE\s{1,}(\d{1,})",line):
+                #found NTO in orca.out
+                found_nto = True
+                match_state_nto=re.search("FOR STATE\s{1,}(\d{1,})",line)
+            elif re.search("\d{1,}[a,b]\s{1,}->\s{1,}\d{1,}[a,b]",line):
+                match_orbs_nto=re.search("(\d{1,}[a,b]\s{1,}->\s{1,}\d{1,}[a,b])\s{1,}: n=\s{1,}(\d{1,}.\d{1,})",line)
+                nto_orblist.append((match_orbs_nto.group(1).replace("  "," "),match_orbs_nto.group(2)))
+            #add orblist to statedict and clear orblist for next state
+            elif re.search('^\s*$',line):
+                if nto_orblist:
+                    nto_statedict[match_state_nto.group(1)] = nto_orblist
+                    nto_orblist=[] 
+            
             if specstring_start in line:
             #found UV data in orca.out
                 found_uv_section=True
@@ -110,17 +149,32 @@ except IOError:
 
 #no UV data in orca.out -> exit here
 if found_uv_section == False:
-    print(f"'{specstring_start}'" + "not found in" + f"'{args.filename}'")
+    print(f"'{specstring_start}'" + " not found in " + f"'{args.filename}'")
+    sys.exit(1)
+    
+##no NTO data in orca.out -> exit here
+if nto == True and found_nto == False:
+    print(f"'{nto_string_start}'" + " not found in " + f"'{args.filename}'")
     sys.exit(1)
 
 #build selected_statedict from statedict with selected states
-if args.states == 'all':   
-    selected_statedict=statedict
-elif re.search("\d",args.states):
-    matchstateslist=(re.findall("\d+",args.states))
-    for elements in matchstateslist:
-        selected_statedict[elements]=statedict[elements]
-
+try:
+    if args.states == 'all':
+        if nto:
+            selected_statedict = nto_statedict
+        else:
+            selected_statedict = statedict
+    elif re.search("\d",args.states):
+        matchstateslist=(re.findall("\d+",args.states))
+        for elements in matchstateslist:
+            if nto:
+                selected_statedict[elements]=nto_statedict[elements]
+            else:
+                selected_statedict[elements]=statedict[elements]
+except KeyError:
+    print("Warning! State(s) nor present. Exit.")
+    sys.exit(1)
+            
 #remove transitions below threshold from selected_statedict
 for elements in selected_statedict:
     transition_list=[]
@@ -140,6 +194,9 @@ for entry in selected_statedict:
 #print md table
 header1="| State | Energy (cm⁻¹) | Wavelength (nm) | fosc         | Selected transitions"
 header2="|-------|---------------|-----------------|--------------|---------------------"
+if nto:
+    header1=(header1+" (NTO)")
+    header2=(header2+"------")
 max_len_line = len(max(md_table, key=len))
 max_len_header = len(header1)
 if max_len_line < max_len_header:
