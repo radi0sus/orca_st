@@ -10,9 +10,9 @@ import argparse                         #argument parser
 found_uv_section=False                                                                   #check for uv data in out
 specstring_start = 'ABSORPTION SPECTRUM VIA TRANSITION ELECTRIC DIPOLE MOMENTS'          #check orca.out from here
 specstring_end = 'ABSORPTION SPECTRUM VIA TRANSITION VELOCITY DIPOLE MOMENTS'            #stop reading orca.out from here
-state_string_start = 'TD-DFT/TDA EXCITED STATES'
-state_string_end = 'TD-DFT/TDA-EXCITATION SPECTRA'
-threshold = 0
+state_string_start = 'TD-DFT/TDA EXCITED STATES'                                         #check for states from here
+state_string_end = 'TD-DFT/TDA-EXCITATION SPECTRA'                                       #stop reading states from here
+threshold = 0                                                                            #default threshold
 
 #global lists
 statelist=list()            #mode
