@@ -31,13 +31,15 @@ word processor.
 - `filename` , required: filename
 - `-s` `S1, S2, ... Sx` , optional: process all or selected states (default is `S = all`)
 - `t` `N`, optional: set a threshold in %. Transitions below the threshold value will not be printed (default is `N = 0`)
+- `nto`, optional: process all or selected states for natural transition orbitals (default is `S = all`)
 
 ## Code options
 You can change the table header in the script (take care of the row size if necessary). 
 
 ## Remarks
 The data are taken from the section "ABSORPTION SPECTRUM VIA TRANSITION ELECTRIC DIPOLE MOMENTS".
-Only tested with "normal" outputs (e.g. no NTO) from TD-DFT calculations.
+Only tested with "normal" outputs (including NTO) from TD-DFT calculations.
+Selected transitions that are below the threshold will not be printed in the table. This may result in empty cells.
 
 ## Examples
 ![show](/examples/show-use2.gif)
@@ -52,3 +54,14 @@ Only tested with "normal" outputs (e.g. no NTO) from TD-DFT calculations.
 |    12 |       46564.6 |           214.8 |  0.022945033 | 52a -> 56a (43.6%), 53a -> 58a (17.8%)|
 |    20 |       50438.7 |           198.3 |  0.011430245 | 50a -> 58a (45.2%), 52a -> 59a (24.0%)|
 |    25 |       53856.3 |           185.7 |  0.048902902 | 46a -> 55a (20.3%), 47a -> 55a (64.4%)|
+
+| State | Energy (cm⁻¹) | Wavelength (nm) | fosc         | Selected transitions (NTO)                                |
+|-------|---------------|-----------------|--------------|-----------------------------------------------------------|
+|     1 |       19649.8 |           508.9 |  0.047997730 | 54a -> 55a (99.7%)                                        |
+|     2 |       30350.7 |           329.5 |  0.012389355 | 54a -> 55a (95.8%)                                        |
+|     3 |       31343.0 |           319.1 |  0.023203271 | 54a -> 55a (97.5%)                                        |
+|     4 |       32895.8 |           304.0 |  0.002292035 | 54a -> 55a (96.1%)                                        |
+|     5 |       34091.2 |           293.3 |  0.176347015 | 54a -> 55a (99.3%)                                        |
+|    12 |       47572.2 |           210.2 |  0.012926362 | 54a -> 55a (76.0%), 53a -> 56a (16.3%)                    |
+|    20 |       50693.7 |           197.3 |  0.349127321 | 54a -> 55a (38.6%), 53a -> 56a (31.2%), 52a -> 57a (27.7%)|
+|    25 |       53666.2 |           186.3 |  0.001229720 | 54a -> 55a (62.0%), 53a -> 56a (29.7%)                    |
