@@ -37,6 +37,7 @@ You can change the table header in the script (take care of the row size if nece
 
 ## Remarks
 The data are taken from the section "ABSORPTION SPECTRUM VIA TRANSITION ELECTRIC DIPOLE MOMENTS".
+Only tested with "normal" outputs (e.g. no NTO) from TD-DFT calculations.
 
 ## Examples
 ![show](/examples/show-use2.gif)
