@@ -20,7 +20,7 @@ python3 orca-st.py filename > filename.md
 it will save the table in markdown format.
 
 Convert markdown to docx:
-(Install [pandoc](https://pandoc.org) first.)
+(Install [PANDOC](https://pandoc.org) first.)
 ```console
 pandoc filename.md > filename.docx
 ```
@@ -34,6 +34,9 @@ word processor.
 
 ## Code options
 You can change the table header in the script (take care of the row size if necessary). 
+
+## Special options and limitations
+The data are taken from the section "ABSORPTION SPECTRUM VIA TRANSITION ELECTRIC DIPOLE MOMENTS".
 
 ## Examples
 ![show](/examples/show-use2.gif)
