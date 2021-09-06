@@ -20,7 +20,7 @@ python3 orca-st.py filename > filename.md
 it will save the table in markdown format.
 
 Convert markdown to docx:
-(Install `pandoc` first.)
+(Install [pandoc](https://pandoc.org) first.)
 ```console
 pandoc filename.md > filename.docx
 ```
