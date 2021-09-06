@@ -37,13 +37,13 @@ parser = argparse.ArgumentParser(prog='orca_st',
 #filename is required
 parser.add_argument("filename", help="the ORCA output file")
 
-#show the matplotlib window
+#select states
 parser.add_argument('-s','--states',
     default='all',
     help='select one ore more or all states\n'
     'e.g. -s 1,2,3,29,30')
 
-#do not save the png file of the spectrum
+#threshold
 parser.add_argument('-t','--threshold',
     type = float,
     default=0,
@@ -95,7 +95,7 @@ try:
                     if specstring_end in line:
                         break
                     #only recognize lines that start with number
-                    #split line into 3 lists mode, energy, intensities
+                    #split line into 4 lists state, energy, nm, intensities
                     #line should start with a number
                     if re.search("\d\s{1,}\d",line): 
                         statelist.append(int(line.strip().split()[0])) 
