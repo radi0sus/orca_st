@@ -29,7 +29,7 @@ word processor.
 
 ## Command-line options
 - `filename` , required: filename
-- `-s` `N, N, ...` , optional: process all or selected states (default is `N = all`)
+- `-s` `S1, S2, ... Sx` , optional: process all or selected states (default is `S = all`)
 - `t` `N`, optional: set a threshold in %. Transitions below the threshold value will not be printed (default is `N = 0`)
 
 ## Code options
