@@ -66,9 +66,7 @@ parser.add_argument('-t','--threshold',
 #NTO
 parser.add_argument('-nto','--nto',
     default=0, action='store_true',
-    help='define a threshold in %% \n'
-    'transitions below the threshold will not be printed\n'
-    'e.g. -t 2')
+    help='select NTO transitions')
 
 #parse arguments
 args = parser.parse_args()
