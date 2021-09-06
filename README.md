@@ -35,7 +35,7 @@ word processor.
 ## Code options
 You can change the table header in the script (take care of the row size if necessary). 
 
-## Special options and limitations
+## Remarks
 The data are taken from the section "ABSORPTION SPECTRUM VIA TRANSITION ELECTRIC DIPOLE MOMENTS".
 
 ## Examples
