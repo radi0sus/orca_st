@@ -37,9 +37,11 @@ word processor.
 You can change the table header in the script (take care of the row size if necessary). 
 
 ## Remarks
-The data are taken from the section "ABSORPTION SPECTRUM VIA TRANSITION ELECTRIC DIPOLE MOMENTS".
-Only tested with "normal" outputs (including NTO) from TD-DFT calculations.
-Selected transitions that are below the threshold will not be printed in the table. This may result in empty cells.
+- The data are taken from the section "ABSORPTION SPECTRUM VIA TRANSITION ELECTRIC DIPOLE MOMENTS".
+- Only tested with "normal" outputs (including NTO) from TD-DFT calculations.
+- Selected transitions that are below the threshold will not be printed in the table. This may result in empty cells.
+- If NTO transitions are present int the output file and NTO transitions should be printed, use the `-nto` keyword. 
+Otherwise, do not use the `-nto` keyword.
 
 ## Examples
 ![show](/examples/show-use2.gif)
