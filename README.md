@@ -31,7 +31,7 @@ word processor.
 - `filename` , required: filename
 - `-s` `S1, S2, ... Sx` , optional: process all or selected states (default is `S = all`)
 - `-t` `N`, optional: set a threshold in %. Transitions below the threshold value will not be printed (default is `N = 0`)
-- `-nto`, optional: process all or selected states for natural transition orbitals (default is `S = all`)
+- `-nto`, optional: process all or selected states for natural transition orbitals (NTO)
 
 ## Code options
 You can change the table header in the script (take care of the row size if necessary). 
@@ -56,6 +56,7 @@ Otherwise, do not use the `-nto` keyword.
 |    12 |       46564.6 |           214.8 |  0.022945033 | 52a -> 56a (43.6%), 53a -> 58a (17.8%)|
 |    20 |       50438.7 |           198.3 |  0.011430245 | 50a -> 58a (45.2%), 52a -> 59a (24.0%)|
 |    25 |       53856.3 |           185.7 |  0.048902902 | 46a -> 55a (20.3%), 47a -> 55a (64.4%)|
+
 
 | State | Energy (cm⁻¹) | Wavelength (nm) | fosc         | Selected transitions (NTO)                                |
 |-------|---------------|-----------------|--------------|-----------------------------------------------------------|
