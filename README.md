@@ -1,7 +1,41 @@
 # orca_st
-orca_st - Easily get states from from orca.out into tables
+A Python 3 script for (hassle-free) extraction of state informations from [ORCA](https://orcaforum.kofo.mpg.de) 
+output files. Selection of states and threshold based printing is possible.
 
-# Examples
+## External modules
+ `re` 
+ 
+## Quick start
+ Start the script with:
+```console
+python3 orca-st.py filename
+```
+it will show the table in the console. The table will probably exceed the size of
+your console window and the table might therefor look unfamiliar.
+
+Start the script with:
+```console
+python3 orca-st.py filename > filename.md
+```
+it will save the table in markdown format.
+
+Convert markdown to docx:
+(Install `pandoc` first.)
+```console
+pandoc filename.md > filename.docx
+```
+This will convert the markdown file to a docx file. Open it with your favorite
+word processor.
+
+## Command-line options
+- `filename` , required: filename
+- `-s` `N, N, ...` , optional: process all or selected states (default is `N = all`)
+- `t` `N`, optional: set a threshold in %. Transitions below the threshold value will not be printed (default is `N = 0`)
+
+## Code options
+You can change the table header in the script (take care of the row size if necessary). 
+
+## Examples
 ![show](/examples/show-use2.gif)
 
 | State | Energy (cm⁻¹) | Wavelength (nm) | fosc         | Selected transitions                  |
