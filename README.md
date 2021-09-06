@@ -11,7 +11,7 @@ output files. Selection of states and threshold based printing is possible.
 python3 orca-st.py filename
 ```
 it will show the table in the console. The table will probably exceed the size of
-your console window and the table might therefor look unfamiliar.
+your console window and the table might therefore look unfamiliar.
 
 Start the script with:
 ```console
