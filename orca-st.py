@@ -8,9 +8,11 @@ import sys                              #system
 import re                               #regular expressions
 import argparse                         #argument parser
 
-#remove comment in case you get an error when saving the output to a file
+#remove comment in case you get an encoding error when saving the output to a file with ">" under windows
 #alternatively replace 'cm⁻¹' with 'cm-1' in the table header (close to the end of script)
-#sys.setdefaultencoding("utf-8")                                                         
+#alternatively you can configure the windows console with "set PYTHONIOENCODING=utf-8" before starting the script
+#replace 'cm⁻¹' with 'cm-1' for pdf file conversion with pandoc in case of unicode issues
+#sys.stdout.reconfigure(encoding='utf-8') 
 
 # global constants
 found_uv_section=False                                                                   #check for uv data in out
