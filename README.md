@@ -41,6 +41,8 @@ You can change the table header in the script (take care of the row size if nece
 - Selected transitions that are below the threshold will not be printed in the table. This may result in empty cells.
 - If NTO transitions are present int the output file and NTO transitions should be printed, use the `-nto` keyword. 
 Otherwise, do not use the `-nto` keyword.
+- The script used two unicode characters, namely "⁻¹". Please have a look at the script if you experience any issues. The easiest
+solution is to replace "⁻¹" with the ascii characters "-1".
 
 ## Examples
 ![show](/examples/show-use2.gif)
