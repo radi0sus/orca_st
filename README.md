@@ -31,6 +31,7 @@ word processor. Convert the file to even more formats such as HTML, PDF or TeX w
 - `-s` `S1, S2, ... Sx` , optional: process all or selected states (default is `S = all`)
 - `-t` `N`, optional: set a threshold in %. Transitions below the threshold value will not be printed (default is `N = 0`)
 - `-nto`, optional: process all or selected states for natural transition orbitals (NTO)
+- `-tr`, optional: show 'Transition' in case of ORCA 6 output files.
 
 ## Code options
 You can change the table header in the script (take care of the row size if necessary). 
