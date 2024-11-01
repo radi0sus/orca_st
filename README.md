@@ -2,6 +2,8 @@
 A Python 3 script for (hassle-free) extraction of state informations from [ORCA](https://orcaforum.kofo.mpg.de) 
 output files. Selection of states and threshold based printing is possible.
 
+Annoyed with Python? Try the [Go Edition](https://github.com/radi0sus/orca_st-go)!
+
 ## External modules
  `re` 
  
